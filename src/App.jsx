@@ -1,15 +1,16 @@
-import { useEffect } from "react";
-import { fetchProfile, fetchDashboard, fetchStats, fetchCallHistory } from "./api/api";
+import { useState } from "react";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
-function App() {
-  useEffect(() => {
-    fetchProfile("u2").then(data => console.log("Profile:", data));
-    fetchDashboard("u2").then(data => console.log("Dashboard:", data));
-    fetchStats("u2").then(data => console.log("Stats:", data));
-    fetchCallHistory("u2", 5).then(data => console.log("Call History:", data));
-  }, []);
+export default function App() {
+  const [userId, setUserId] = useState(null);
 
-  return <div>Check console</div>;
+  const handleLogin = (email) => {
+    setUserId(email === "john@example.com" ? "u1" : "u2");
+  };
+
+  const handleLogout = () => setUserId(null);
+
+  if (!userId) return <Login onLogin={handleLogin} />;
+  return <Dashboard userId={userId} onLogout={handleLogout} />;
 }
-
-export default App;
