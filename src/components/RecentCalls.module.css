@@ -1,0 +1,16 @@
+.heading {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.group {
+  margin-bottom: 24px;
+}
+
+.dateLabel {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
