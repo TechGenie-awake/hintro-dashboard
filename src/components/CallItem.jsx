@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MoreVertical, Users } from "lucide-react";
 import styles from "./CallItem.module.css";
 
 export default function CallItem({ call }) {
@@ -14,14 +15,18 @@ export default function CallItem({ call }) {
       <div className={styles.avatar}>{initial}</div>
       <div className={styles.info}>
         <p className={styles.name}>{call.description || "Call"}</p>
-        <p className={styles.participants}>👥👥👥</p>
+        <p className={styles.participants}>
+          <Users size={14} color="var(--color-text-muted)" />
+        </p>
       </div>
       <span className={styles.time}>{time}</span>
       <div className={styles.menuWrapper}>
         <button
           className={styles.menuBtn}
           onClick={() => setMenuOpen(!menuOpen)}
-        >⋮</button>
+        >
+          <MoreVertical size={18} />
+        </button>
         {menuOpen && (
           <div className={styles.menu}>
             <button className={styles.menuItem}>View</button>

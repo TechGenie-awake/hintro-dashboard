@@ -31,8 +31,10 @@
 }
 
 .participants {
-  font-size: 12px;
-  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
 }
 
 .time {
@@ -47,11 +49,12 @@
 .menuBtn {
   background: none;
   border: none;
-  font-size: 20px;
   color: var(--color-text-muted);
   padding: 4px 8px;
   border-radius: var(--radius-md);
   transition: background 0.15s;
+  display: flex;
+  align-items: center;
 }
 
 .menuBtn:hover {

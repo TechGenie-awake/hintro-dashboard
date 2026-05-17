@@ -4,10 +4,12 @@ import Dashboard from "./pages/Dashboard";
 import FeedbackHistory from "./pages/FeedbackHistory";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
+import { Menu } from "lucide-react";
 
 export default function App() {
   const [userId, setUserId] = useState(null);
   const [page, setPage] = useState("dashboard");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogin = (email) => {
     setUserId(email === "john@example.com" ? "u1" : "u2");
@@ -24,16 +26,34 @@ export default function App() {
     <div className={styles.app}>
       <Sidebar
         activePage={page}
-        onNavigate={setPage}
+        onNavigate={(p) => {
+          setPage(p);
+          setSidebarOpen(false);
+        }}
         onLogout={handleLogout}
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
+      {sidebarOpen && (
+        <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
+      )}
       <div className={styles.content}>
+        <div className={styles.topbar}>
+          <button
+            className={styles.hamburger}
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu size={22} />
+          </button>
+        </div>
         {page === "dashboard" && (
-          <Dashboard userId={userId} onLogout={handleLogout} onNavigate={setPage} />
+          <Dashboard
+            userId={userId}
+            onLogout={handleLogout}
+            onNavigate={setPage}
+          />
         )}
-        {page === "feedback-history" && (
-          <FeedbackHistory />
-        )}
+        {page === "feedback-history" && <FeedbackHistory />}
       </div>
     </div>
   );
