@@ -73,16 +73,33 @@ export default function Sidebar({
 
         <div className={styles.bottom}>
           <button
-            className={styles.bottomBtn}
+            className={styles.bottomNavBtn}
             onClick={() => onNavigate && onNavigate("feedback-history")}
           >
-            <Inbox size={18} /> Feedback History
+            <div
+              className={`${styles.navItem} ${activePage === "feedback-history" ? styles.navItemActive : ""}`}
+            >
+              <div className={styles.navItemLeft}>
+                <span className={styles.navIcon}>
+                  <Inbox size={18} />
+                </span>
+                <span className={styles.navLabel}>Feedback History</span>
+              </div>
+            </div>
           </button>
+
           <button
-            className={styles.bottomBtn}
+            className={styles.bottomNavBtn}
             onClick={() => setShowFeedback(true)}
           >
-            <Gift size={18} /> Feedback
+            <div className={styles.navItem}>
+              <div className={styles.navItemLeft}>
+                <span className={styles.navIcon}>
+                  <Gift size={18} />
+                </span>
+                <span className={styles.navLabel}>Feedback</span>
+              </div>
+            </div>
           </button>
           <div className={styles.usageWrapper}>
             <div className={styles.usageTop}>

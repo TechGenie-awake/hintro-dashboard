@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import FeedbackHistory from "./pages/FeedbackHistory";
+import ComingSoon from "./components/ComingSoon";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
-import ComingSoon from "./components/ComingSoon";
+import { fetchDashboard } from "./api/api";
 
 export default function App() {
   const [userId, setUserId] = useState(null);
   const [page, setPage] = useState("dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [usage, setUsage] = useState(null);
 
   const handleLogin = (email) => {
     setUserId(email === "john@example.com" ? "u1" : "u2");
@@ -18,7 +20,14 @@ export default function App() {
   const handleLogout = () => {
     setUserId(null);
     setPage("dashboard");
+    setUsage(null);
   };
+
+  useEffect(() => {
+    if (userId) {
+      fetchDashboard(userId).then((d) => setUsage(d.usage?.kb_files));
+    }
+  }, [userId]);
 
   if (!userId) return <Login onLogin={handleLogin} />;
 
@@ -30,9 +39,9 @@ export default function App() {
           setPage(p);
           setSidebarOpen(false);
         }}
-        onLogout={handleLogout}
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        usage={usage}
       />
       {sidebarOpen && (
         <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
