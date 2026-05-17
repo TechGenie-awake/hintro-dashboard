@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import FeedbackHistory from "./pages/FeedbackHistory";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
+import ComingSoon from "./components/ComingSoon";
 
 export default function App() {
   const [userId, setUserId] = useState(null);
@@ -44,7 +45,30 @@ export default function App() {
             onMenuOpen={() => setSidebarOpen(true)}
           />
         )}
-        {page === "feedback-history" && <FeedbackHistory />}
+        {page === "feedback-history" && (
+          <FeedbackHistory onMenuOpen={() => setSidebarOpen(true)} />
+        )}
+        {page === "call-insights" && (
+          <ComingSoon
+            title="Call Insights"
+            onMenuOpen={() => setSidebarOpen(true)}
+          />
+        )}
+        {page === "knowledge-base" && (
+          <ComingSoon
+            title="Knowledge Base"
+            onMenuOpen={() => setSidebarOpen(true)}
+          />
+        )}
+        {page === "prompts" && (
+          <ComingSoon title="Prompts" onMenuOpen={() => setSidebarOpen(true)} />
+        )}
+        {page === "boxy-controls" && (
+          <ComingSoon
+            title="Boxy Controls"
+            onMenuOpen={() => setSidebarOpen(true)}
+          />
+        )}
       </div>
     </div>
   );
