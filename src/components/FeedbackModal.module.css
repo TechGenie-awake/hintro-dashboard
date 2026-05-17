@@ -133,8 +133,8 @@
 
 .submitBtn {
   padding: 10px 24px;
-  background: #555;
-  color: #fff;
+  background: var(--color-submit-btn);
+  color: var(--color-bg);
   border: none;
   border-radius: var(--radius-md);
   font-size: 14px;
@@ -156,7 +156,7 @@
 .successIcon {
   width: 80px;
   height: 80px;
-  background: #fef9c3;
+  background: var(--color-success-bg);
   border-radius: 50%;
   display: flex;
   align-items: center;

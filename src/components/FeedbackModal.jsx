@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./FeedbackModal.module.css";
-import { X, ArrowLeft } from "lucide-react";
+import { X, ArrowLeft, Star } from "lucide-react";
 
 const getQuestion = (rating) => {
   if (rating <= 2) return "What frustrated you or felt confusing?";
@@ -34,6 +34,13 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
     localStorage.setItem("hintro_feedback", JSON.stringify(existing));
     setStep(3);
     if (onSubmitted) onSubmitted();
+  };
+
+  const getStarColor = (index, rating, hovered) => {
+    const active = hovered || rating;
+    if (index > active) return "#e5e7eb";
+    const colors = ["#fef08a", "#fde047", "#facc15", "#eab308", "#eaa206"];
+    return colors[active - 1];
   };
 
   return (
@@ -90,11 +97,11 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
                   onMouseLeave={() => setHovered(0)}
                   onClick={() => setRating(i)}
                 >
-                  <img
-                    src="/starbadge.png"
-                    className={styles.starImg}
-                    style={{ opacity: i <= (hovered || rating) ? 1 : 0.3 }}
-                    alt="star"
+                  <Star
+                    size={32}
+                    fill={getStarColor(i, rating, hovered)}
+                    color={getStarColor(i, rating, hovered)}
+                    strokeWidth={0}
                   />
                 </button>
               ))}
