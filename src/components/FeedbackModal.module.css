@@ -38,9 +38,10 @@
 .closeBtn {
   background: none;
   border: none;
-  font-size: 18px;
   color: var(--color-text-muted);
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .fieldLabel {
@@ -121,6 +122,9 @@
   font-size: 14px;
   cursor: pointer;
   transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .backBtn:hover {

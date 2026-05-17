@@ -1,4 +1,13 @@
 import { useState, useEffect } from "react";
+import {
+  Clock,
+  Sparkles,
+  CalendarDays,
+  Play,
+  LogOut,
+  ChevronDown,
+  ChartPie,
+} from "lucide-react";
 import styles from "./Dashboard.module.css";
 import StatCard from "../components/StatCard";
 import RecentCalls from "../components/RecentCalls";
@@ -21,7 +30,7 @@ function timeAgo(isoArray) {
   return `${days} days ago`;
 }
 
-export default function Dashboard({ userId, onLogout}) {
+export default function Dashboard({ userId, onLogout }) {
   const [profile, setProfile] = useState(null);
   const [stats, setStats] = useState(null);
   const [calls, setCalls] = useState([]);
@@ -31,7 +40,7 @@ export default function Dashboard({ userId, onLogout}) {
   useEffect(() => {
     fetchProfile(userId).then(setProfile);
     fetchStats(userId).then(setStats);
-    fetchCallHistory(userId, 10).then(d => setCalls(d.callSessions || []));
+    fetchCallHistory(userId, 10).then((d) => setCalls(d.callSessions || []));
   }, [userId]);
 
   const firstName = profile?.firstName || "there";
@@ -42,22 +51,27 @@ export default function Dashboard({ userId, onLogout}) {
       <div className={styles.topbar}>
         <h2 className={styles.pageTitle}>Dashboard</h2>
         <div className={styles.topbarRight}>
-          <button className={styles.tutorialBtn}>▶ Watch Tutorial</button>
+          <button className={styles.tutorialBtn}>
+            <Play size={13} /> Watch Tutorial
+          </button>
           <div className={styles.userMenuWrapper}>
             <button
               className={styles.avatarBtn}
               onClick={() => setShowUserMenu(!showUserMenu)}
             >
               <div className={styles.avatar}>{firstName[0]}</div>
-              <span>▾</span>
+              <ChevronDown size={16} />
             </button>
             {showUserMenu && (
               <div className={styles.userMenu}>
                 <button
                   className={styles.userMenuItem}
-                  onClick={() => { setShowLogout(true); setShowUserMenu(false); }}
+                  onClick={() => {
+                    setShowLogout(true);
+                    setShowUserMenu(false);
+                  }}
                 >
-                  ↪ Log out
+                  <LogOut size={14} /> Log out
                 </button>
               </div>
             )}
@@ -80,10 +94,30 @@ export default function Dashboard({ userId, onLogout}) {
         </div>
 
         <div className={styles.statsGrid}>
-          <StatCard icon="📊" iconBg="#fde8e8" label="Total Sessions" value={stats?.totalSessions ?? 0} />
-          <StatCard icon="🕐" iconBg="#e0f5f5" label="Average Duration" value={stats ? formatDuration(stats.averageDuration) : "0"} />
-          <StatCard icon="✨" iconBg="#e8f5e8" label="AI Used" value={stats ? `${stats.totalAIInteractions} times` : "0"} />
-          <StatCard icon="📅" iconBg="#ede9fe" label="Last Session" value={stats ? timeAgo(stats.lastSession) : "—"} />
+          <StatCard
+            icon={<ChartPie size={22} color="#e05c5c" />}
+            iconBg="#fde8e8"
+            label="Total Sessions"
+            value={stats?.totalSessions ?? 0}
+          />
+          <StatCard
+            icon={<Clock size={22} color="#2bac8a" />}
+            iconBg="#e0f5f5"
+            label="Average Duration"
+            value={stats ? formatDuration(stats.averageDuration) : "0"}
+          />
+          <StatCard
+            icon={<Sparkles size={22} color="#4caf6e" />}
+            iconBg="#e8f5e8"
+            label="AI Used"
+            value={stats ? `${stats.totalAIInteractions} times` : "0"}
+          />
+          <StatCard
+            icon={<CalendarDays size={22} color="#7c3aed" />}
+            iconBg="#ede9fe"
+            label="Last Session"
+            value={stats ? timeAgo(stats.lastSession) : "—"}
+          />
         </div>
 
         <RecentCalls calls={calls} />

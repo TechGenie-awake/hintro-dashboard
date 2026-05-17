@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Mail, Eye, EyeOff } from "lucide-react";
 import styles from "./Login.module.css";
 
 export default function Login({ onLogin }) {
@@ -20,7 +21,9 @@ export default function Login({ onLogin }) {
           <div className={styles.field}>
             <label className={styles.label}>Email</label>
             <div className={styles.inputWrapper}>
-              <span className={styles.inputIcon}>✉️</span>
+              <span className={styles.inputIcon}>
+                <Mail size={16} />
+              </span>
               <input
                 type="email"
                 placeholder="Example@email.com"
@@ -39,14 +42,14 @@ export default function Login({ onLogin }) {
                 placeholder="••••••••"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                className={styles.input}
+                className={styles.inputPassword}
               />
               <button
                 type="button"
                 onClick={() => setShowPass(!showPass)}
                 className={styles.eyeBtn}
               >
-                {showPass ? "🙈" : "👁️"}
+                {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
           </div>

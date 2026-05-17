@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./FeedbackModal.module.css";
+import { X, ArrowLeft } from "lucide-react";
 
 const getQuestion = (rating) => {
   if (rating <= 2) return "What frustrated you or felt confusing?";
@@ -21,12 +22,14 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
 
   const handleSubmit = () => {
     if (!rating) return;
-    const existing = JSON.parse(localStorage.getItem("hintro_feedback") || "[]");
+    const existing = JSON.parse(
+      localStorage.getItem("hintro_feedback") || "[]",
+    );
     existing.push({
       title,
       rating,
       description,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
     });
     localStorage.setItem("hintro_feedback", JSON.stringify(existing));
     setStep(3);
@@ -36,26 +39,33 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-
         {step === 1 && (
           <>
             <div className={styles.header}>
               <div>
                 <h3 className={styles.title}>Give Feedback</h3>
-                <p className={styles.sub}>Describe your experience using Hintro...</p>
+                <p className={styles.sub}>
+                  Describe your experience using Hintro...
+                </p>
               </div>
-              <button className={styles.closeBtn} onClick={onClose}>✕</button>
+              <button className={styles.closeBtn} onClick={onClose}>
+                <X size={18} />
+              </button>
             </div>
             <label className={styles.fieldLabel}>Feedback Title</label>
             <input
               className={styles.input}
               placeholder="My First Call"
               value={title}
-              onChange={e => setTitle(e.target.value)}
+              onChange={(e) => setTitle(e.target.value)}
             />
             <div className={styles.actions}>
-              <button className={styles.backBtn} onClick={onClose}>✕ Cancel</button>
-              <button className={styles.submitBtn} onClick={handleNext}>Next →</button>
+              <button className={styles.backBtn} onClick={onClose}>
+                <X size={14} /> Cancel
+              </button>
+              <button className={styles.submitBtn} onClick={handleNext}>
+                Next →
+              </button>
             </div>
           </>
         )}
@@ -65,12 +75,14 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
             <div className={styles.header}>
               <div>
                 <h3 className={styles.title}>Give Feedback</h3>
-                <p className={styles.sub}>Describe your experience using Hintro...</p>
+                <p className={styles.sub}>
+                  Describe your experience using Hintro...
+                </p>
               </div>
             </div>
 
             <div className={styles.stars}>
-              {[1, 2, 3, 4, 5].map(i => (
+              {[1, 2, 3, 4, 5].map((i) => (
                 <button
                   key={i}
                   className={styles.starBtn}
@@ -95,11 +107,15 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
               className={styles.textarea}
               placeholder=""
               value={description}
-              onChange={e => setDescription(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
             />
             <div className={styles.actions}>
-              <button className={styles.backBtn} onClick={() => setStep(1)}>← Back</button>
-              <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
+              <button className={styles.backBtn} onClick={() => setStep(1)}>
+                <ArrowLeft size={14} /> Back
+              </button>
+              <button className={styles.submitBtn} onClick={handleSubmit}>
+                Submit
+              </button>
             </div>
           </>
         )}
@@ -109,15 +125,18 @@ export default function FeedbackModal({ onClose, onSubmitted }) {
             <div className={styles.successIcon}>
               <img src="/starbadge.png" alt="star" style={{ width: 60 }} />
             </div>
-            <h3 className={styles.successTitle}>Thank you for your feedback!!</h3>
+            <h3 className={styles.successTitle}>
+              Thank you for your feedback!!
+            </h3>
             <p className={styles.successSub}>
               Our team reviews every suggestion to improve AI responses,
               workflows, and overall experience.
             </p>
-            <button className={styles.closeBtn2} onClick={onClose}>✕</button>
+            <button className={styles.closeBtn2} onClick={onClose}>
+              <X size={18} />
+            </button>
           </div>
         )}
-
       </div>
     </div>
   );

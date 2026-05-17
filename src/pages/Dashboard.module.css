@@ -21,8 +21,10 @@
   justify-content: space-between;
   padding: 16px 32px;
   border-bottom: 1px solid var(--color-border);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: var(--sidebar-width);
+  right: 0;
   background: var(--color-bg);
   z-index: 10;
 }
@@ -106,6 +108,10 @@
   border: none;
   text-align: left;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 .userMenuItem:hover {
@@ -114,6 +120,7 @@
 
 .content {
   padding: 32px;
+  padding-top: 96px;
 }
 
 .welcomeRow {
@@ -192,9 +199,10 @@
 
   .content {
     padding: 20px 16px;
+    padding-top: 80px;
   }
 
   .topbar {
-    padding: 12px 16px;
+    left: 0;
   }
 }
