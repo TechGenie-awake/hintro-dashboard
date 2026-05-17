@@ -110,18 +110,56 @@
   background: var(--color-bg-secondary);
 }
 
-.upgradeBtn {
+.usageWrapper {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.usageTop {
+  padding: 14px 16px;
+  text-align: center;
+}
+
+.usageText {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.usageBold {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.usageBar {
   width: 100%;
-  margin-top: 8px;
+  height: 4px;
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.usageFill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.upgradeBtn {
+  width: 90%;
+  margin: 8px;
   padding: 10px;
-  background: #888;
-  color: #fff;
+  background: var(--color-text-muted);
+  color: var(--color-bg);
   border: none;
   border-radius: var(--radius-md);
   font-weight: 600;
   font-size: 15px;
   transition: opacity 0.2s;
-}
+  cursor: pointer;
+  }
+
 
 .upgradeBtn:hover {
   opacity: 0.85;
