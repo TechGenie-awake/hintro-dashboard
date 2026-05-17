@@ -4,7 +4,6 @@ import Dashboard from "./pages/Dashboard";
 import FeedbackHistory from "./pages/FeedbackHistory";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
-import { Menu } from "lucide-react";
 
 export default function App() {
   const [userId, setUserId] = useState(null);
@@ -38,19 +37,11 @@ export default function App() {
         <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
       )}
       <div className={styles.content}>
-        <div className={styles.topbar}>
-          <button
-            className={styles.hamburger}
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Menu size={22} />
-          </button>
-        </div>
         {page === "dashboard" && (
           <Dashboard
             userId={userId}
             onLogout={handleLogout}
-            onNavigate={setPage}
+            onMenuOpen={() => setSidebarOpen(true)}
           />
         )}
         {page === "feedback-history" && <FeedbackHistory />}

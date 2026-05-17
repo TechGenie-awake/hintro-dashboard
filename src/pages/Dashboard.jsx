@@ -7,6 +7,7 @@ import {
   LogOut,
   ChevronDown,
   ChartPie,
+  Menu,
 } from "lucide-react";
 import styles from "./Dashboard.module.css";
 import StatCard from "../components/StatCard";
@@ -30,7 +31,7 @@ function timeAgo(isoArray) {
   return `${days} days ago`;
 }
 
-export default function Dashboard({ userId, onLogout }) {
+export default function Dashboard({ userId, onLogout, onMenuOpen }) {
   const [profile, setProfile] = useState(null);
   const [stats, setStats] = useState(null);
   const [calls, setCalls] = useState([]);
@@ -49,7 +50,12 @@ export default function Dashboard({ userId, onLogout }) {
     <div>
       {/* Topbar */}
       <div className={styles.topbar}>
-        <h2 className={styles.pageTitle}>Dashboard</h2>
+        <div className={styles.topbarLeft}>
+          <button className={styles.hamburger} onClick={onMenuOpen}>
+            <Menu size={22} />
+          </button>
+          <h2 className={styles.pageTitle}>Dashboard</h2>
+        </div>
         <div className={styles.topbarRight}>
           <button className={styles.tutorialBtn}>
             <Play size={13} /> Watch Tutorial
