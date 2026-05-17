@@ -1,19 +1,17 @@
 import { useState } from "react";
 import styles from "./Sidebar.module.css";
 import FeedbackModal from "./FeedbackModal";
-import FeedbackHistory from "./FeedbackHistory";
 
 const navItems = [
-  { icon: "⊞", label: "Dashboard", active: true },
-  { icon: "📞", label: "Call Insights" },
-  { icon: "📄", label: "Knowledge Base", soon: true },
-  { icon: "💬", label: "Prompts", soon: true },
-  { icon: "🌐", label: "Boxy Controls", soon: true },
+  { key: "dashboard", icon: "⊞", label: "Dashboard" },
+  { key: "call-insights", icon: "📞", label: "Call Insights" },
+  { key: "knowledge-base", icon: "📄", label: "Knowledge Base", soon: true },
+  { key: "prompts", icon: "💬", label: "Prompts", soon: true },
+  { key: "boxy-controls", icon: "🌐", label: "Boxy Controls", soon: true },
 ];
 
-export default function Sidebar({ open, onClose }) {
+export default function Sidebar({ activePage, onNavigate, open, onClose }) {
   const [showFeedback, setShowFeedback] = useState(false);
-  const [showHistory, setShowHistory] = useState(false);
 
   return (
     <>
@@ -26,8 +24,9 @@ export default function Sidebar({ open, onClose }) {
         <nav className={styles.nav}>
           {navItems.map(item => (
             <div
-              key={item.label}
-              className={`${styles.navItem} ${item.active ? styles.navItemActive : ""}`}
+              key={item.key}
+              onClick={() => onNavigate && onNavigate(item.key)}
+              className={`${styles.navItem} ${activePage === item.key ? styles.navItemActive : ""}`}
             >
               <div className={styles.navItemLeft}>
                 <span className={styles.navIcon}>{item.icon}</span>
@@ -41,7 +40,7 @@ export default function Sidebar({ open, onClose }) {
         <div className={styles.bottom}>
           <button
             className={styles.bottomBtn}
-            onClick={() => setShowHistory(true)}
+            onClick={() => onNavigate && onNavigate("feedback-history")}
           >
             📥 Feedback History
           </button>
@@ -58,9 +57,6 @@ export default function Sidebar({ open, onClose }) {
 
       {showFeedback && (
         <FeedbackModal onClose={() => setShowFeedback(false)} />
-      )}
-      {showHistory && (
-        <FeedbackHistory onClose={() => setShowHistory(false)} />
       )}
     </>
   );
